@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "socket": {
+    "path": "/Users/lukepan/.openclaw/exec-approvals.sock",
+    "token": "tHsqkuRZLoAlYa5YcC9hv6n2bho6Tqev"
+  },
+  "defaults": {},
+  "agents": {}
+}

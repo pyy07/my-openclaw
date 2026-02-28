@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "f7741068-b31a-41a0-9f66-c1871a023d29",
+      "name": "tech-news-brief",
+      "description": "每日 15:00 科技新闻简报发飞书",
+      "enabled": true,
+      "createdAtMs": 1772026595759,
+      "updatedAtMs": 1772262120048,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 15 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "请用网页搜索完成一份「今日科技简报」并直接输出，不要其他解释。\n\n1) 今日科技要闻：搜索「今日科技新闻」或「科技 今日」，取 4–6 条，每条一两句话+链接。\n2) GitHub 热门：搜索「GitHub trending today」，取 2–4 个 repo，项目名+一句话+链接。\n3) 科技媒体/趋势：搜索「TechCrunch OR The Verge 今日」或「科技 今日 热点」，取 2–4 条，一句话+链接。\n\n输出格式：一、今日科技要闻（列表）；二、GitHub 热门（列表）；三、科技媒体/趋势（列表）。每条带链接即可。",
+        "timeoutSeconds": 300
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "feishu",
+        "to": "ou_27eafc99a5b351d7df9ca5709e74ea41"
+      },
+      "state": {
+        "nextRunAtMs": 1772348400000,
+        "lastRunAtMs": 1772262000020,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 120028,
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 4,
+        "lastError": "cron: job execution timed out"
+      }
+    }
+  ]
+}

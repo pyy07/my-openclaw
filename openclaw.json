@@ -1,0 +1,275 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.2.22-2",
+    "lastTouchedAt": "2026-02-28T10:03:22.306Z"
+  },
+  "env": {
+    "vars": {
+      "HTTP_PROXY": "http://127.0.0.1:7897"
+    }
+  },
+  "wizard": {
+    "lastRunAt": "2026-02-23T17:46:39.477Z",
+    "lastRunVersion": "2026.2.22-2",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local"
+  },
+  "browser": {
+    "enabled": true,
+    "headless": false,
+    "defaultProfile": "openclaw"
+  },
+  "models": {
+    "providers": {
+      "siliconflow": {
+        "baseUrl": "https://api.siliconflow.cn/v1",
+        "apiKey": "${SILICONFLOW_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+            "name": "Qwen3-235B-Instruct",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0.35,
+              "output": 1.42,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 8192
+          },
+          {
+            "id": "Qwen/Qwen3-14B",
+            "name": "Qwen3-14B",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0.07,
+              "output": 0.28,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 131072,
+            "maxTokens": 8192
+          },
+          {
+            "id": "Qwen/Qwen2-7B-Instruct",
+            "name": "Qwen2-7B-Instruct",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 32768,
+            "maxTokens": 8192
+          }
+        ]
+      },
+      "modelscope": {
+        "baseUrl": "https://api-inference.modelscope.cn/v1",
+        "apiKey": "${MODELSCOPE_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "Qwen/Qwen3-Coder-480B-A35B-Instruct",
+            "name": "Qwen3-Coder-480B",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 131072,
+            "maxTokens": 8192
+          },
+          {
+            "id": "deepseek-ai/DeepSeek-V3.2",
+            "name": "DeepSeek-V3.2",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 131072,
+            "maxTokens": 8192
+          }
+        ]
+      },
+      "ollama": {
+        "baseUrl": "http://127.0.0.1:11434/v1",
+        "apiKey": "ollama-local",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "modelscope.cn/Qwen/Qwen3-8B-GGUF",
+            "name": "modelscope.cn/Qwen/Qwen3-8B-GGUF",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 131072,
+            "maxTokens": 16384
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "ollama/modelscope.cn/Qwen/Qwen3-8B-GGUF",
+        "fallbacks": [
+          "openrouter/arcee-ai/trinity-large-preview:free",
+          "siliconflow/Qwen/Qwen3-235B-A22B-Instruct-2507",
+          "modelscope/Qwen/Qwen3-Coder-480B-A35B-Instruct"
+        ]
+      },
+      "models": {
+        "siliconflow/Qwen/Qwen3-235B-A22B-Instruct-2507": {
+          "alias": "Qwen3-235B"
+        },
+        "siliconflow/Qwen/Qwen3-14B": {
+          "alias": "Qwen3-14B"
+        },
+        "siliconflow/Qwen/Qwen2-7B-Instruct": {
+          "alias": "Qwen2-7B"
+        },
+        "modelscope/Qwen/Qwen3-Coder-480B-A35B-Instruct": {
+          "alias": "Qwen3-Coder"
+        },
+        "modelscope/deepseek-ai/DeepSeek-V3.2": {
+          "alias": "DeepSeek-V3.2"
+        },
+        "openrouter/arcee-ai/trinity-large-preview:free": {
+          "alias": "Trinity Large"
+        },
+        "ollama/modelscope.cn/Qwen/Qwen3-8B-GGUF": {}
+      },
+      "workspace": "/Users/lukepan/.openclaw/workspace",
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "heartbeat": {
+        "every": "1h",
+        "target": "last",
+        "prompt": "Read HEARTBEAT.md. Each heartbeat: research Xiaohongshu-relevant hot topics and operation ideas from multiple channels (web search, tech/news trends), compile a short report, and send it to the user's Feishu. Do not directly operate the Xiaohongshu account. Do not reply only HEARTBEAT_OK."
+      }
+    }
+  },
+  "tools": {
+    "web": {
+      "search": {
+        "provider": "brave",
+        "apiKey": "${BRAVE_API_KEY}",
+        "maxResults": 5,
+        "timeoutSeconds": 30
+      }
+    }
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "session": {
+    "dmScope": "per-channel-peer"
+  },
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "self-improvement": {
+          "enabled": true
+        }
+      },
+      "installs": {
+        "self-improvement": {
+          "source": "path",
+          "sourcePath": "/Users/lukepan/.openclaw/workspace/skills/self-improving-agent/hooks/openclaw",
+          "installPath": "/Users/lukepan/.openclaw/hooks/self-improvement",
+          "installedAt": "2026-02-25T13:50:16.405Z",
+          "hooks": [
+            "self-improvement"
+          ]
+        }
+      }
+    }
+  },
+  "channels": {
+    "feishu": {
+      "enabled": true,
+      "appId": "cli_a9163fdff3f8dccd",
+      "appSecret": "9leV6HDexkM06Co99HX1rc1lDovNGwQi",
+      "domain": "feishu",
+      "groupPolicy": "open",
+      "connectionMode": "websocket",
+      "dmPolicy": "pairing",
+      "accounts": {
+        "main": {
+          "appId": "cli_a9163fdff3f8dccd",
+          "appSecret": "9leV6HDexkM06Co99HX1rc1lDovNGwQi",
+          "connectionMode": "websocket",
+          "domain": "feishu",
+          "name": "小龙虾"
+        }
+      }
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "16586dbff74733adc7b1cd3ea4ae72f057f1121decd47d58"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    }
+  },
+  "skills": {
+    "entries": {
+      "tavily": {
+        "enabled": true,
+        "env": {
+          "TAVILY_API_KEY": "${TAVILY_API_KEY}"
+        }
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "feishu": {
+        "enabled": true
+      }
+    }
+  }
+}

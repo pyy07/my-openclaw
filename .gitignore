@@ -1,0 +1,66 @@
+# Logs and runtime
+logs/
+*.log
+
+# Secrets and env
+.env
+.env.*
+!.env.example
+
+# Backups
+*.bak
+*.bak.*
+
+# Browser / Chrome profile (runtime)
+browser/
+
+# Credentials and tokens
+credentials/
+
+# Runtime queue and media
+delivery-queue/
+media/
+
+# Canvas runtime
+canvas/
+
+# Session transcripts (large, runtime)
+agents/main/sessions/*.jsonl
+agents/main/sessions/*.reset.*
+
+# Paired devices (runtime)
+devices/
+
+# Feishu cache/tokens
+feishu/
+
+# Config cache / identity
+config/
+identity/
+completions/
+extensions/
+
+# OS and editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+Untitled-*
+
+# Update check (runtime)
+update-check.json
+
+# Workspace runtime / temp
+workspace/memory/
+
+# Sensitive in skills
+**/cookies.json
+**/cookies/
+
+# Dependencies and binaries
+**/node_modules/
+*.tar.gz
+*.zip
+
+# Nested git (e.g. skills cloned as repos)
+**/.git/

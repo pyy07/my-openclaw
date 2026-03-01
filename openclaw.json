@@ -143,9 +143,9 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "ollama/modelscope.cn/Qwen/Qwen3-8B-GGUF",
+        "primary": "openrouter/arcee-ai/trinity-large-preview:free",
         "fallbacks": [
-          "openrouter/arcee-ai/trinity-large-preview:free",
+          "ollama/modelscope.cn/Qwen/Qwen3-8B-GGUF",
           "siliconflow/Qwen/Qwen3-235B-A22B-Instruct-2507",
           "modelscope/Qwen/Qwen3-Coder-480B-A35B-Instruct"
         ]
@@ -177,8 +177,10 @@
       },
       "heartbeat": {
         "every": "1h",
-        "target": "last",
-        "prompt": "Read HEARTBEAT.md. Each heartbeat: research Xiaohongshu-relevant hot topics and operation ideas from multiple channels (web search, tech/news trends), compile a short report, and send it to the user's Feishu. Do not directly operate the Xiaohongshu account. Do not reply only HEARTBEAT_OK."
+        "target": "feishu",
+        "to": "user:ou_27eafc99a5b351d7df9ca5709e74ea41",
+        "activeHours": { "start": "08:00", "end": "22:00" },
+        "prompt": "Read HEARTBEAT.md if it exists (workspace context). Follow it strictly. Do not infer or repeat old tasks from prior chats. If nothing needs attention, reply HEARTBEAT_OK."
       }
     }
   },
@@ -230,7 +232,8 @@
       "domain": "feishu",
       "groupPolicy": "open",
       "connectionMode": "websocket",
-      "dmPolicy": "pairing",
+      "dmPolicy": "allowlist",
+      "allowFrom": ["ou_27eafc99a5b351d7df9ca5709e74ea41"],
       "accounts": {
         "main": {
           "appId": "cli_a9163fdff3f8dccd",
@@ -261,6 +264,15 @@
         "enabled": true,
         "env": {
           "TAVILY_API_KEY": "${TAVILY_API_KEY}"
+        }
+      },
+      "mcporter": {
+        "enabled": true
+      },
+      "qwen-image": {
+        "enabled": true,
+        "env": {
+          "DASHSCOPE_API_KEY": "${DASHSCOPE_API_KEY}"
         }
       }
     }

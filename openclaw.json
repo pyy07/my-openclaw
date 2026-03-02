@@ -271,6 +271,7 @@
       },
       "qwen-image": {
         "enabled": true,
+        "apiKey": "${DASHSCOPE_API_KEY}",
         "env": {
           "DASHSCOPE_API_KEY": "${DASHSCOPE_API_KEY}"
         }

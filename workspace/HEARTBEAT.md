@@ -1,11 +1,7 @@
-# HEARTBEAT — 小红书热门 + 天马行空点子
+# Heartbeat checklist
 
-每轮 heartbeat 只做两件事。**每轮必须重新拉取数据，禁止输出与上一轮相同或雷同的热门关键词、热议内容、点子。**
+- **小红书自动运营**：每次 heartbeat 执行监控脚本（检查未完成步骤并重试）
 
-1. **获取小红书热门/推荐内容**：不要用「热门」当搜索词或 track-topic 的话题。应通过**推荐**拉取：执行 `workspace/skills/xiaohongshu/scripts/recommend.sh` 或 MCP 工具 `list_feeds`（获取首页推荐列表），从中取几条作为「当前热门/推荐」；需要某类垂直内容时再用 search / track-topic 搜**具体话题**（如「科技」「旅行」），不要搜「热门」「热议」。若无法获取新数据，就写「本次未获取到新数据」再照样发 2～4 个新点子。
-2. **根据这些话题，想 2～4 个天马行空、有趣的点子**发给我（脑洞、奇怪组合、冷门好玩都行，一两句即可）。**点子内容每轮要有变化，不要重复上一轮那几条。**
-
-把「热门话题简要 + 点子列表」整理成一条短消息，用 **message** 发到飞书。  
-to 用：`user:ou_27eafc99a5b351d7df9ca5709e74ea41`。不要只回复 HEARTBEAT_OK。
-
-不直接操作小红书账号（不发帖、不评论、不点赞）。
+  ```bash
+  python3 /Users/lukepan/.openclaw/workspace/skills/xiaohongshu-autopilot/scripts/heartbeat_monitor.py
+  ```

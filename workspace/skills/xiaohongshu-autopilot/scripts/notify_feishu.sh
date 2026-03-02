@@ -10,6 +10,7 @@ usage() {
   cat <<USAGE
 Usage:
   ./scripts/notify_feishu.sh "message text"
+  ./scripts/notify_feishu.sh --media /abs/path/image.png "message text"
   echo "message text" | ./scripts/notify_feishu.sh
 
 Environment:
@@ -36,6 +37,12 @@ if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
   exit 0
 fi
 
+MEDIA=""
+if [[ "${1:-}" == "--media" ]]; then
+  MEDIA="${2:-}"
+  shift 2
+fi
+
 if [[ $# -gt 0 ]]; then
   MESSAGE="$*"
 else
@@ -53,7 +60,11 @@ if ! command -v openclaw >/dev/null 2>&1; then
 fi
 
 set +e
-send_output="$(openclaw message send --channel "$CHANNEL" --target "$TARGET" --message "$MESSAGE" --json 2>&1)"
+if [[ -n "$MEDIA" ]]; then
+  send_output="$(openclaw message send --channel "$CHANNEL" --target "$TARGET" --message "$MESSAGE" --media "$MEDIA" --json 2>&1)"
+else
+  send_output="$(openclaw message send --channel "$CHANNEL" --target "$TARGET" --message "$MESSAGE" --json 2>&1)"
+fi
 rc=$?
 set -e
 

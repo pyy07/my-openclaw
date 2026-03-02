@@ -19,7 +19,7 @@ send_note() {
   fi
 }
 
-send_note "[小红书自动运营] 开始探索 $DAY。动作总数: 1个recommend + ${#KEYWORDS[@]}个search。"
+send_note "[小红书自动运营] 开始探索 ${DAY}。动作总数: 1个recommend + ${#KEYWORDS[@]}个search。"
 
 recommend_status="skip"
 search_ok=0
@@ -27,7 +27,7 @@ search_fail=0
 
 if [[ -x "$XHS_SCRIPTS_DIR/recommend.sh" ]]; then
   send_note "[小红书自动运营] 动作开始: recommend.sh（首页推荐抓取）"
-  if (cd "$XHS_SCRIPTS_DIR" && ./recommend.sh >/tmp/xhs-recommend-$DAY.txt 2>&1); then
+  if (cd "$XHS_SCRIPTS_DIR" && ./recommend.sh >/tmp/xhs-recommend-${DAY}.txt 2>&1); then
     recommend_status="ok"
     send_note "[小红书自动运营] 动作结果: recommend.sh 成功"
   else
@@ -44,11 +44,11 @@ fi
   echo "## 推荐流抓取"
   if [[ "$recommend_status" == "ok" ]]; then
     echo '```'
-    cat "/tmp/xhs-recommend-$DAY.txt"
+    cat "/tmp/xhs-recommend-${DAY}.txt"
     echo '```'
   elif [[ "$recommend_status" == "fail" ]]; then
     echo '```'
-    cat "/tmp/xhs-recommend-$DAY.txt"
+    cat "/tmp/xhs-recommend-${DAY}.txt"
     echo '```'
     echo "- recommend.sh 执行失败"
   else
@@ -85,6 +85,6 @@ fi
   echo "- 候选3："
 } > "$OUT"
 
-send_note "[小红书自动运营] 探索完成 $DAY。结果: recommend=$recommend_status, search_ok=$search_ok, search_fail=$search_fail。日志: $OUT"
+send_note "[小红书自动运营] 探索完成 ${DAY}。结果: recommend=${recommend_status}, search_ok=${search_ok}, search_fail=${search_fail}。日志: ${OUT}"
 
 echo "[ok] discovery log generated: $OUT"

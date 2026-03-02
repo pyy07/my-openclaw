@@ -38,6 +38,20 @@ Skills define _how_ tools work. This file is for _your_ specifics — the stuff 
 
 - Key 已配置在 `~/.openclaw/.env` 的 `DASHSCOPE_API_KEY`。**执行生图命令时禁止在命令前加 `export DASHSCOPE_API_KEY=...`**（包括 `sk-xxx` 或任何占位符），否则会覆盖正确 key。直接执行 `uv run .../generate_image.py --prompt "..."` 即可，不要加 export 或 --api-key。
 
+## 飞书发图（减少「只发路径不发图」）
+
+OpenClaw 飞书插件存在已知问题：**媒体上传失败时会回退为只发送文件路径文本**，对方看到的是路径而不是图片（见 upstream issue #17077 / #19171）。
+
+**可行做法：**
+
+1. **把图片先存到 workspace 再发**：发飞书前，将图片保存到 **workspace 目录下**（如 `workspace/media/xxx.png`），再用 message 发送。路径必须在 OpenClaw 可读范围内，workspace 是最稳妥的。
+2. **生图时若已知要发飞书**：用 qwen-image 的 `--filename` 直接写到 workspace，例如：
+   ```bash
+   uv run .../generate_image.py --prompt "..." --filename workspace/media/生成的图.png
+   ```
+   脚本会输出 `MEDIA: <workspace 内绝对路径>`，再调用 message 发到飞书时，尽量使用该路径作为附件，减少上传被拒绝导致的回退。
+3. **飞书应用权限**：确保应用已开通 `im:resource`（上传/发送图片等资源），否则上传更容易失败。
+
 ---
 
 ## What Goes Here

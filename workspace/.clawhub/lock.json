@@ -8,6 +8,18 @@
     "self-improving-agent": {
       "version": "1.0.11",
       "installedAt": 1772027313698
+    },
+    "qwen-image": {
+      "version": "1.0.0",
+      "installedAt": 1772373664045
+    },
+    "skill-vetting": {
+      "version": "1.1.0",
+      "installedAt": 1772383582669
+    },
+    "playwright-mcp": {
+      "version": "1.0.0",
+      "installedAt": 1772384171983
     }
   }
 }

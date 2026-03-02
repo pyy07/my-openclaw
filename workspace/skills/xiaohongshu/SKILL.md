@@ -19,6 +19,18 @@ description: |
 
 > **完整文档请查看 [README.md](README.md)**
 
+## 优先使用 mcporter 调用 MCP（推荐）
+
+本工作区内 OpenClaw 已启用 **mcporter**，且小红书 MCP 已配置为 mcporter 的 `xiaohongshu-mcp` 服务。**执行小红书相关能力时，优先用 mcporter 直接调用 MCP 工具**，与 Cursor/IDE 侧使用同一套接口和 schema。
+
+- **发布图文**（`publish_content`）：
+  ```bash
+  mcporter call xiaohongshu-mcp.publish_content title="标题" content="正文（不要带#标签）" images='["/绝对路径/图.jpg"]'
+  ```
+  必填：`title`（最多 20 字）、`content`、`images`（至少 1 张，本地路径或 HTTP 链接）。可选：`tags='["标签1","标签2"]'`、`is_original=true`、`visibility="公开可见"|"仅自己可见"|"仅互关好友可见"`、`schedule_at="ISO8601 时间"`。
+- **查看接口与参数**：`mcporter list xiaohongshu-mcp --schema`。
+- 若 mcporter 不可用或调用失败，再退而使用本 skill 的脚本（如 `scripts/mcp-call.sh`、`scripts/publish-content.sh`）。调用前请确保 MCP 服务已启动（`scripts/start-mcp.sh`）。
+
 ## 快速参考
 
 | 脚本 | 用途 |
@@ -67,8 +79,17 @@ cd scripts/
 | `user_profile` | 获取用户主页 |
 | `like_feed` | 点赞/取消 |
 | `favorite_feed` | 收藏/取消 |
-| `publish_content` | 发布图文笔记 |
+| `publish_content` | 发布图文笔记（推荐：`mcporter call xiaohongshu-mcp.publish_content title=... content=... images='[...]'`） |
 | `publish_with_video` | 发布视频笔记 |
+
+## 发布图文 / 视频时的成功判定（重要）
+
+**禁止在未确认工具明确返回成功时向用户声称「发布成功」。**
+
+- `publish_content` / `publish_with_video` 调用后，**必须根据工具返回的完整内容判断**：
+  - 若返回内容中包含 `error`、`panic`、`context deadline exceeded`、`Execution context was destroyed` 等，或请求长时间（如接近 2 分钟）后返回空/异常，**一律视为发布失败**，应向用户说明「发布可能未成功，请到小红书账号或 ~/.xiaohongshu/mcp.log 确认」。
+  - 只有工具返回中**明确**包含成功含义（如成功发布、笔记 ID、已发布等）时，才能告知用户「发布成功」。
+- 若无法从返回内容判断（如超时无响应、返回被截断），**不要假设成功**，应告知用户「未收到明确成功结果，请自行到小红书查看或查看 MCP 日志」。
 
 ## 热点跟踪
 

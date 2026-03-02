@@ -35,6 +35,90 @@
         "consecutiveErrors": 1,
         "lastError": "cron: job execution timed out"
       }
+    },
+    {
+      "id": "7aeac179-e9a9-4929-a112-36be1156cf40",
+      "name": "xhs-autopilot-morning",
+      "description": "小红书自动运营探索（09:00）",
+      "enabled": true,
+      "createdAtMs": 1772457769000,
+      "updatedAtMs": 1772457769000,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行这个命令并完成飞书汇报：`/Users/lukepan/.openclaw/workspace/skills/xiaohongshu-autopilot/scripts/run_exploration_cycle.sh`。要求：1) 逐动作汇报探索过程和结果；2) 若失败，汇报失败原因与日志路径；3) 不要跳过执行。",
+        "timeoutSeconds": 900
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "feishu",
+        "to": "user:ou_27eafc99a5b351d7df9ca5709e74ea41"
+      },
+      "state": {
+        "nextRunAtMs": 1772499600000
+      }
+    },
+    {
+      "id": "ab469c10-3126-4ff9-8d38-ad447e727c73",
+      "name": "xhs-autopilot-noon",
+      "description": "小红书自动运营探索（14:00）",
+      "enabled": true,
+      "createdAtMs": 1772457769000,
+      "updatedAtMs": 1772457769000,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 14 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行这个命令并完成飞书汇报：`/Users/lukepan/.openclaw/workspace/skills/xiaohongshu-autopilot/scripts/run_exploration_cycle.sh`。要求：1) 逐动作汇报探索过程和结果；2) 若失败，汇报失败原因与日志路径；3) 不要跳过执行。",
+        "timeoutSeconds": 900
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "feishu",
+        "to": "user:ou_27eafc99a5b351d7df9ca5709e74ea41"
+      },
+      "state": {
+        "nextRunAtMs": 1772517600000
+      }
+    },
+    {
+      "id": "05e25365-2e79-47aa-aaa5-1bc6baa17276",
+      "name": "xhs-autopilot-night",
+      "description": "小红书自动运营探索（20:30）",
+      "enabled": true,
+      "createdAtMs": 1772457769000,
+      "updatedAtMs": 1772457769000,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 20 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行这个命令并完成飞书汇报：`/Users/lukepan/.openclaw/workspace/skills/xiaohongshu-autopilot/scripts/run_exploration_cycle.sh`。要求：1) 逐动作汇报探索过程和结果；2) 若失败，汇报失败原因与日志路径；3) 不要跳过执行。",
+        "timeoutSeconds": 900
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "feishu",
+        "to": "user:ou_27eafc99a5b351d7df9ca5709e74ea41"
+      },
+      "state": {
+        "nextRunAtMs": 1772541000000
+      }
     }
   ]
 }

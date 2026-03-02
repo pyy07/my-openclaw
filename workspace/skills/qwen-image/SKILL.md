@@ -26,6 +26,12 @@ Generate and save locally:
 uv run {baseDir}/scripts/generate_image.py --prompt "一副典雅庄重的对联悬挂于厅堂之中" --size "1664*928" --filename output.png
 ```
 
+**若要发到飞书**：先把图存到 **workspace 目录下**（如 `workspace/media/图名.png`），再发 message，可减少飞书「只发路径不发图」的回退问题。例如：
+```bash
+uv run {baseDir}/scripts/generate_image.py --prompt "..." --filename workspace/media/生成的图.png
+```
+脚本会输出 `MEDIA: <workspace 内路径>`，发飞书时用该路径作为附件。
+
 With custom model:
 Support `qwen-image-max-2025-12-30` `qwen-image-plus-2026-01-09` `qwen-image-plus`
 ```bash
@@ -66,3 +72,4 @@ uv run {baseDir}/scripts/generate_image.py --prompt "a beautiful sunset over mou
 - Always look for the line starting with `MEDIA_URL:` in the script output and render the image for the user
 - Default negative prompt helps avoid common AI artifacts
 - Images are hosted on Alibaba Cloud OSS with temporary access URLs
+- **飞书发图**：若用户要发到飞书，用 `--filename workspace/media/xxx.png` 把图存到 workspace 下，再发 message，可避免飞书插件上传失败时只发路径文本的问题（详见 workspace/TOOLS.md「飞书发图」）

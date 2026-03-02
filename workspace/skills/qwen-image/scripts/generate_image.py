@@ -116,9 +116,9 @@ def main():
         }
     }
 
-    print(f"Generating image with {args.model}...")
-    print(f"Size: {args.size}")
-    print(f"Prompt: {args.prompt}")
+    # print(f"Generating image with {args.model}...")
+    # print(f"Size: {args.size}")
+    # print(f"Prompt: {args.prompt}")
 
     try:
         # Make API request

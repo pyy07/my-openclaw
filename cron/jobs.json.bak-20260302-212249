@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "f7741068-b31a-41a0-9f66-c1871a023d29",
+      "name": "tech-news-brief",
+      "description": "每日 15:00 科技简报：小红书热议+GitHub 热门+当日科技要闻，发飞书",
+      "enabled": true,
+      "createdAtMs": 1772026595759,
+      "updatedAtMs": 1772435040030,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 15 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "做一份「今日科技简报」发飞书，按下面 3 个来源收集后汇总成一份简报。\n\n1) 小红书热议主题：用 workspace 下的小红书 skill 查当日热议/热门话题。执行 workspace/skills/xiaohongshu/scripts/track-topic.sh 「科技」 --limit 5 或通过 MCP search_feeds 搜「科技 热门」「热议」，取约 5 条。\n\n2) GitHub 开源热点：调用 1 次 web_search，query 用「GitHub trending today」或「GitHub trending repositories」，取 3～5 个热门开源项目，项目名+一句话+链接。\n\n3) 当日科技新闻：再调用 1 次 web_search，query 用「今日科技热点」或「today tech news」，取 4～6 条，每条一两句+链接。\n\n4) 汇总：把上述三块整理成一份简报，直接输出下面格式的正文（不要其他解释）：\n---\n【今日科技简报】\n\n一、小红书热议\n（列表）\n\n二、GitHub 热门开源\n（列表，带链接）\n\n三、当日科技要闻\n（列表，带链接）\n---",
+        "timeoutSeconds": 240
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "feishu",
+        "to": "user:ou_27eafc99a5b351d7df9ca5709e74ea41"
+      },
+      "state": {
+        "nextRunAtMs": 1772521200000,
+        "lastRunAtMs": 1772434800005,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 240025,
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 1,
+        "lastError": "cron: job execution timed out"
+      }
+    }
+  ]
+}

@@ -26,9 +26,12 @@ description: |
    在 `logs/daily/YYYY-MM-DD.md` 创建或追加本日运行记录，写下「开始时间」与「步骤 1：开始探索」。
 
 2. **探索 GitHub**  
-   使用 **OpenClaw 的 github skill**（openclaw-github-assistant）：调用 `list_repos`、`search_repos` 或 `get_repo`（不要用 mcporter 或 Cursor 的 GitHub MCP）。按「推荐选题标准」（见下）筛选候选仓库。  
-   在日志中记录：本步完成时间、使用的接口与参数、候选数量。  
-   **若探索失败**（如认证错误、无可用工具）：仍必须完成步骤 6、7，用 `notify_feishu.sh` 发一条失败原因给你。
+   使用 **github-cli** 和/或 **scrapling-official** skill 探索仓库：  
+   - **github-cli**：在会话内执行 `gh` 命令，例如 `gh search repos <关键词>`（可加 `--language`、`--topic`、`--stars`、`--limit`）、`gh repo view owner/repo`（查看详情）、`gh repo list`（列仓库）。需本机已安装 `gh` 且已 `gh auth login` 或设置 `GH_TOKEN`。  
+   - **scrapling-official**：需要抓取 GitHub 页面（如 GitHub Trending、某仓库 README）时，用 `scrapling extract get/fetch` 等命令或按该 skill 写 Python 抓取并解析。  
+   **不要**使用 `openclaw exec`、`openclaw agent` 等 shell 命令去调用其他 skill；不要用 mcporter 或 Cursor 的 GitHub MCP。按「推荐选题标准」（见下）筛选候选仓库。  
+   在日志中记录：本步完成时间、使用的工具与参数、候选数量。  
+   **若探索失败**（认证错误、无可用工具、或返回为空）：**不得**进行步骤 3～5 的「写真实仓库」；只做步骤 6、7，用 `notify_feishu.sh` 发失败原因，且**不得**写入含占位符的草稿（见步骤 5）。
 
 3. **精选 2～3 个仓库**  
    从候选中挑出 2～3 个最符合「漫说GitHub」调性的仓库（有趣、有料、对小白友好）。  
@@ -43,9 +46,10 @@ description: |
 
 5. **写入当日草稿**  
    - 草稿路径**固定**：`drafts/review/YYYY-MM-DD-manshuo-github.md`。日期**必须与当日日志文件完全一致**（即与 `logs/daily/YYYY-MM-DD.md` 同一天，含年份，避免 2025/2026 混用导致草稿缺失）。skill 根目录为 `/Users/lukepan/.openclaw/workspace/skills/manshuo-github`。  
+   - **禁止占位符**：仅当步骤 2～4 获得了**真实仓库数据**（有具体 owner/repo 名、简介、链接）时，才写入 2～3 个仓库块。若探索失败或未获得任何真实仓库，**不得**写入含「仓库名 (owner/repo)」「https://github.com/owner/repo」等占位符的草稿；只写入一句「今日探索未获得仓库数据，未产出推荐仓库。」并继续步骤 6、7。  
    - **若当日草稿已存在**（例如同日已跑过探索）：将**本轮**撰写的 2～3 个仓库块**追加**到该文件末尾，序号接续**（如已有 ## 1～3，则本轮为 ## 4、## 5、## 6）**，不覆盖原有内容。  
-   - **若当日草稿不存在**：新建该文件，写入本轮 2～3 个仓库的完整块。  
-   - 本步**不可跳过**：必须把步骤 4 的内容写入上述路径后再进行步骤 6。
+   - **若当日草稿不存在**：新建该文件，写入本轮 2～3 个仓库的完整块（或有且仅有上述一句说明）。  
+   - 本步**不可跳过**：必须把步骤 4 的产出（或「未获得数据」说明）写入上述路径后再进行步骤 6。
 
 6. **飞书发送给你 review**  
    调用 `notify_feishu.sh`，发送内容**必须包含本轮的 GitHub 项目信息**，不得只发「请查收」或路径。至少包含：  

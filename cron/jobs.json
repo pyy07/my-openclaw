@@ -7,7 +7,7 @@
       "description": "每日 15:00 科技简报：小红书热议+GitHub 热门+当日科技要闻，发飞书",
       "enabled": true,
       "createdAtMs": 1772026595759,
-      "updatedAtMs": 1772435040030,
+      "updatedAtMs": 1773039840045,
       "schedule": {
         "kind": "cron",
         "expr": "0 15 * * *",
@@ -26,23 +26,23 @@
         "to": "user:ou_27eafc99a5b351d7df9ca5709e74ea41"
       },
       "state": {
-        "nextRunAtMs": 1772521200000,
-        "lastRunAtMs": 1772434800005,
+        "nextRunAtMs": 1773126000000,
+        "lastRunAtMs": 1773039600007,
         "lastRunStatus": "error",
         "lastStatus": "error",
-        "lastDurationMs": 240025,
+        "lastDurationMs": 240038,
         "lastDeliveryStatus": "unknown",
-        "consecutiveErrors": 1,
+        "consecutiveErrors": 6,
         "lastError": "cron: job execution timed out"
       }
     },
     {
-      "id": "7aeac179-e9a9-4929-a112-36be1156cf40",
-      "name": "xhs-autopilot-morning",
-      "description": "小红书自动运营探索（09:00）",
+      "id": "manshuo-github-daily",
+      "name": "manshuo-github-daily",
+      "description": "漫说GitHub 每日探索（09:00）：找 2～3 个仓库、写介绍与推荐点、发飞书 review",
       "enabled": true,
-      "createdAtMs": 1772457769000,
-      "updatedAtMs": 1772457769000,
+      "createdAtMs": 1772860000000,
+      "updatedAtMs": 1773069740026,
       "schedule": {
         "kind": "cron",
         "expr": "0 9 * * *",
@@ -52,7 +52,7 @@
       "wakeMode": "now",
       "payload": {
         "kind": "agentTurn",
-        "message": "执行这个命令并完成飞书汇报：`/Users/lukepan/.openclaw/workspace/skills/xiaohongshu-autopilot/scripts/run_exploration_cycle.sh`。要求：1) 逐动作汇报探索过程和结果；2) 若失败，汇报失败原因与日志路径；3) 不要跳过执行。",
+        "message": "请先读取并严格按「漫说GitHub」SKILL 执行每日流程。SKILL 路径：/Users/lukepan/.openclaw/workspace/skills/manshuo-github/SKILL.md。\n\n【重要】探索 GitHub 时：使用 **github-cli**（gh search repos、gh repo view 等）和/或 **scrapling-official**（抓取 GitHub 页面）探索仓库；不要用 openclaw exec/agent 或 mcporter/Cursor GitHub MCP。\n\n流程：1) 在 skill 目录下 logs/daily 记录开始；2) 用 gh/scrapling 探索并精选 2～3 个仓库；3) 为每个写约 100 字介绍、2～3 个推荐点、仓库地址，写入 drafts/review/ 当日草稿；4) 用绝对路径 /Users/lukepan/.openclaw/workspace/skills/manshuo-github/scripts/notify_feishu.sh 把草稿或摘要发飞书给我；5) 记录结束。无论成功或失败，最后都必须再执行一次 notify_feishu.sh 发一条结果通知。skill 根目录：/Users/lukepan/.openclaw/workspace/skills/manshuo-github。",
         "timeoutSeconds": 900
       },
       "delivery": {
@@ -61,63 +61,14 @@
         "to": "user:ou_27eafc99a5b351d7df9ca5709e74ea41"
       },
       "state": {
-        "nextRunAtMs": 1772499600000
-      }
-    },
-    {
-      "id": "ab469c10-3126-4ff9-8d38-ad447e727c73",
-      "name": "xhs-autopilot-noon",
-      "description": "小红书自动运营探索（14:00）",
-      "enabled": true,
-      "createdAtMs": 1772457769000,
-      "updatedAtMs": 1772457769000,
-      "schedule": {
-        "kind": "cron",
-        "expr": "0 14 * * *",
-        "tz": "Asia/Shanghai"
-      },
-      "sessionTarget": "isolated",
-      "wakeMode": "now",
-      "payload": {
-        "kind": "agentTurn",
-        "message": "执行这个命令并完成飞书汇报：`/Users/lukepan/.openclaw/workspace/skills/xiaohongshu-autopilot/scripts/run_exploration_cycle.sh`。要求：1) 逐动作汇报探索过程和结果；2) 若失败，汇报失败原因与日志路径；3) 不要跳过执行。",
-        "timeoutSeconds": 900
-      },
-      "delivery": {
-        "mode": "announce",
-        "channel": "feishu",
-        "to": "user:ou_27eafc99a5b351d7df9ca5709e74ea41"
-      },
-      "state": {
-        "nextRunAtMs": 1772517600000
-      }
-    },
-    {
-      "id": "05e25365-2e79-47aa-aaa5-1bc6baa17276",
-      "name": "xhs-autopilot-night",
-      "description": "小红书自动运营探索（20:30）",
-      "enabled": true,
-      "createdAtMs": 1772457769000,
-      "updatedAtMs": 1772457769000,
-      "schedule": {
-        "kind": "cron",
-        "expr": "30 20 * * *",
-        "tz": "Asia/Shanghai"
-      },
-      "sessionTarget": "isolated",
-      "wakeMode": "now",
-      "payload": {
-        "kind": "agentTurn",
-        "message": "执行这个命令并完成飞书汇报：`/Users/lukepan/.openclaw/workspace/skills/xiaohongshu-autopilot/scripts/run_exploration_cycle.sh`。要求：1) 逐动作汇报探索过程和结果；2) 若失败，汇报失败原因与日志路径；3) 不要跳过执行。",
-        "timeoutSeconds": 900
-      },
-      "delivery": {
-        "mode": "announce",
-        "channel": "feishu",
-        "to": "user:ou_27eafc99a5b351d7df9ca5709e74ea41"
-      },
-      "state": {
-        "nextRunAtMs": 1772541000000
+        "nextRunAtMs": 1773104400000,
+        "lastRunAtMs": 1773069536604,
+        "lastRunStatus": "ok",
+        "consecutiveErrors": 0,
+        "lastStatus": "ok",
+        "lastDurationMs": 203422,
+        "lastDeliveryStatus": "not-delivered",
+        "lastDelivered": false
       }
     }
   ]

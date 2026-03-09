@@ -5,7 +5,8 @@
   },
   "env": {
     "vars": {
-      "HTTP_PROXY": "http://127.0.0.1:7897"
+      "HTTP_PROXY": "http://127.0.0.1:7897",
+      "HTTPS_PROXY": "http://127.0.0.1:7897"
     }
   },
   "wizard": {
@@ -121,8 +122,8 @@
         "api": "openai-completions",
         "models": [
           {
-            "id": "modelscope.cn/Qwen/Qwen3-8B-GGUF",
-            "name": "modelscope.cn/Qwen/Qwen3-8B-GGUF",
+            "id": "qwen3.5:0.8b",
+            "name": "qwen3.5:0.8b",
             "reasoning": false,
             "input": [
               "text"
@@ -145,7 +146,7 @@
       "model": {
         "primary": "openrouter/arcee-ai/trinity-large-preview:free",
         "fallbacks": [
-          "ollama/modelscope.cn/Qwen/Qwen3-8B-GGUF",
+          "ollama/qwen3.5:0.8b",
           "siliconflow/Qwen/Qwen3-235B-A22B-Instruct-2507",
           "modelscope/Qwen/Qwen3-Coder-480B-A35B-Instruct"
         ]
@@ -169,7 +170,7 @@
         "openrouter/arcee-ai/trinity-large-preview:free": {
           "alias": "Trinity Large"
         },
-        "ollama/modelscope.cn/Qwen/Qwen3-8B-GGUF": {}
+        "ollama/qwen3.5:0.8b": {}
       },
       "workspace": "/Users/lukepan/.openclaw/workspace",
       "compaction": {

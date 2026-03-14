@@ -6,8 +6,8 @@
       "api": "openai-completions",
       "models": [
         {
-          "id": "modelscope.cn/Qwen/Qwen3-8B-GGUF",
-          "name": "modelscope.cn/Qwen/Qwen3-8B-GGUF",
+          "id": "qwen3.5:0.8b",
+          "name": "qwen3.5:0.8b",
           "reasoning": false,
           "input": [
             "text"
@@ -144,6 +144,35 @@
           "contextWindow": 32768,
           "maxTokens": 8192,
           "api": "openai-completions"
+        }
+      ]
+    },
+    "github-copilot": {
+      "baseUrl": "https://api.individual.githubcopilot.com",
+      "models": []
+    },
+    "minimax-cn": {
+      "baseUrl": "http://120.24.86.32:3000/anthropic",
+      "apiKey": "sk-cp-4c1b3db83be7b9345042ca22a764a08758a87cf8c130ca41bfb67de35d2e629d",
+      "api": "anthropic-messages",
+      "authHeader": true,
+      "models": [
+        {
+          "id": "MiniMax-M2.5",
+          "name": "MiniMax M2.5",
+          "reasoning": true,
+          "input": [
+            "text"
+          ],
+          "cost": {
+            "input": 0.3,
+            "output": 1.2,
+            "cacheRead": 0.03,
+            "cacheWrite": 0.12
+          },
+          "contextWindow": 200000,
+          "maxTokens": 8192,
+          "api": "anthropic-messages"
         }
       ]
     }

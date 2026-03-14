@@ -138,14 +138,39 @@
             "maxTokens": 16384
           }
         ]
+      },
+      "minimax-cn": {
+        "baseUrl": "http://120.24.86.32:3000/anthropic",
+        "api": "anthropic-messages",
+        "authHeader": true,
+        "apiKey": "${MINIMAX_CN_API_KEY}",
+        "models": [
+          {
+            "id": "MiniMax-M2.5",
+            "name": "MiniMax M2.5",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0.3,
+              "output": 1.2,
+              "cacheRead": 0.03,
+              "cacheWrite": 0.12
+            },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          }
+        ]
       }
     }
   },
   "agents": {
     "defaults": {
       "model": {
-        "primary": "openrouter/arcee-ai/trinity-large-preview:free",
+        "primary": "minimax-cn/MiniMax-M2.5",
         "fallbacks": [
+          "openrouter/arcee-ai/trinity-large-preview:free",
           "ollama/qwen3.5:0.8b",
           "siliconflow/Qwen/Qwen3-235B-A22B-Instruct-2507",
           "modelscope/Qwen/Qwen3-Coder-480B-A35B-Instruct"
@@ -170,7 +195,10 @@
         "openrouter/arcee-ai/trinity-large-preview:free": {
           "alias": "Trinity Large"
         },
-        "ollama/qwen3.5:0.8b": {}
+        "ollama/qwen3.5:0.8b": {},
+        "minimax-cn/MiniMax-M2.5": {
+          "alias": "MiniMax M2.5"
+        }
       },
       "workspace": "/Users/lukepan/.openclaw/workspace",
       "compaction": {
@@ -180,10 +208,121 @@
         "every": "1h",
         "target": "feishu",
         "to": "user:ou_27eafc99a5b351d7df9ca5709e74ea41",
-        "activeHours": { "start": "08:00", "end": "22:00" },
+        "activeHours": {
+          "start": "08:00",
+          "end": "22:00"
+        },
         "prompt": "Read HEARTBEAT.md if it exists (workspace context). Follow it strictly. Do not infer or repeat old tasks from prior chats. If nothing needs attention, reply HEARTBEAT_OK."
       }
-    }
+    },
+    "list": [
+      {
+        "id": "taizi",
+        "workspace": "/Users/lukepan/.openclaw/workspace-taizi",
+        "subagents": {
+          "allowAgents": [
+            "zhongshu"
+          ]
+        }
+      },
+      {
+        "id": "zhongshu",
+        "workspace": "/Users/lukepan/.openclaw/workspace-zhongshu",
+        "subagents": {
+          "allowAgents": [
+            "menxia",
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "menxia",
+        "workspace": "/Users/lukepan/.openclaw/workspace-menxia",
+        "subagents": {
+          "allowAgents": [
+            "shangshu",
+            "zhongshu"
+          ]
+        }
+      },
+      {
+        "id": "shangshu",
+        "workspace": "/Users/lukepan/.openclaw/workspace-shangshu",
+        "subagents": {
+          "allowAgents": [
+            "zhongshu",
+            "menxia",
+            "hubu",
+            "libu",
+            "bingbu",
+            "xingbu",
+            "gongbu",
+            "libu_hr"
+          ]
+        }
+      },
+      {
+        "id": "hubu",
+        "workspace": "/Users/lukepan/.openclaw/workspace-hubu",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "libu",
+        "workspace": "/Users/lukepan/.openclaw/workspace-libu",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "bingbu",
+        "workspace": "/Users/lukepan/.openclaw/workspace-bingbu",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "xingbu",
+        "workspace": "/Users/lukepan/.openclaw/workspace-xingbu",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "gongbu",
+        "workspace": "/Users/lukepan/.openclaw/workspace-gongbu",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "libu_hr",
+        "workspace": "/Users/lukepan/.openclaw/workspace-libu_hr",
+        "subagents": {
+          "allowAgents": [
+            "shangshu"
+          ]
+        }
+      },
+      {
+        "id": "zaochao",
+        "workspace": "/Users/lukepan/.openclaw/workspace-zaochao",
+        "subagents": {
+          "allowAgents": []
+        }
+      }
+    ]
   },
   "tools": {
     "web": {
@@ -234,7 +373,9 @@
       "groupPolicy": "open",
       "connectionMode": "websocket",
       "dmPolicy": "allowlist",
-      "allowFrom": ["ou_27eafc99a5b351d7df9ca5709e74ea41"],
+      "allowFrom": [
+        "ou_27eafc99a5b351d7df9ca5709e74ea41"
+      ],
       "accounts": {
         "main": {
           "appId": "cli_a9163fdff3f8dccd",
